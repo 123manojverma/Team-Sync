@@ -7,19 +7,19 @@ import workspaceRepository from "../repositories/workspaceRepository.js";
 import ClientError from "../utils/errors/clientError.js";
 import ValidationError from "../utils/errors/validationError.js";
 
-const isUserAdminOfWorkspace = (workspace, userId) => {
+export const isUserAdminOfWorkspace = (workspace, userId) => {
     return workspace.members.find(
         (member) => (member.memberId.toString() === userId.toString() || member.memberId._id.toString() === userId.toString()) && member.role === 'admin'
     )
 }
 
-const isUserMemberOfWorkspace = (workspace, userId) => {
+export const isUserMemberOfWorkspace = (workspace, userId) => {
     return workspace.members.find(
-        (member) => member.memberId.toString() === userId
+        (member) => member.memberId.toString() === userId.toString()
     )
 }
 
-const isChannelAlreadyPartOfWorkspace = (workspace, channelName) => {
+export const isChannelAlreadyPartOfWorkspace = (workspace, channelName) => {
     return workspace.channels.find(
         (channel) => channel.name.toLowerCase() === channelName.toLowerCase()
     );
